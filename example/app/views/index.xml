@@ -1,0 +1,16 @@
+<Alloy>
+	<Window class="container">
+		
+		<Widget src="com.imobicloud.label" class="label-1" 
+		    text="Label 1: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quam enim, interdum eu lobortis sed, faucibus ac massa."
+		    textColor="#000000"
+		    search="[
+		        { 'text': 'consectetur adipiscing elit', 'color': '#ff0000', 'font': { 'fontSize': 14 } },
+		        { 'text': 'Nam quam enim', 'font': { 'fontSize': 18, 'fontFamily': 'HelveticaNeue-Bold' } }
+		    ]">
+		</Widget>
+		
+		<Widget id="label2" src="com.imobicloud.label" />
+		
+	</Window>
+</Alloy>

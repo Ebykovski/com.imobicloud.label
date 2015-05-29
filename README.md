@@ -3,6 +3,8 @@
 
 Formatted Label
 
+![Label example](http://i.imgur.com/YxLQ7zQ.png)
+
 xml
 
 	<Widget id="label" src="com.imobicloud.label" class="tip-label" 
@@ -42,7 +44,7 @@ js
 	    var o = $.createStyle({ classes: 'tip-label-2' });
 	    _.extend(o, {
 	        text: 'Tip: Swipe top and bottom to see all items.',
-			textColor="#000000",
+			textColor: "#000000",
 			search: [
 				{ text: 'top', color: 'red' },
 				{ text: 'bottom', color: 'blue' }
@@ -50,3 +52,7 @@ js
 	    });
 	    return o;
 	}());
+
+Issues:
+
+- https://jira.appcelerator.org/browse/TC-4987
