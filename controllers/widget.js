@@ -12,6 +12,7 @@ args = {
     // ... tss styles
     text:       '',
     textColor:  '#ffffff',
+    textFont: 	{ 'fontSize': 18, 'fontFamily': 'HelveticaNeue-Light' },
     search:     [{ 'text': '', 'color': '#ffffff', 'font': { 'fontSize': 18, 'fontFamily': 'HelveticaNeue-Medium' } }],
     duplicate:  true | false,
     case_sensitive: true | false 
@@ -44,6 +45,14 @@ function formatText(args) {
             attributedString.addAttribute({
                 type: Ti.UI.iOS.ATTRIBUTE_FOREGROUND_COLOR,
                 value: args.textColor,
+                range: [0, text.length]
+            });
+        }
+        
+        if (args.textFont) {
+            attributedString.addAttribute({
+                type: Ti.UI.iOS.ATTRIBUTE_FONT,
+                value: args.textFont,
                 range: [0, text.length]
             });
         }
@@ -113,6 +122,7 @@ function formatText(args) {
         }
 
         args.textColor && ($.label.color = args.textColor);
+        args.textFont && ($.label.font = args.textFont);
         $.label.html = html;
         $.label.value = text;
     }

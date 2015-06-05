@@ -56,3 +56,7 @@ js
 Issues:
 
 - https://jira.appcelerator.org/browse/TC-4987
+
+Changes log:
+
+- Add textFont
