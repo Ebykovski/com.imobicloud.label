@@ -127,3 +127,7 @@ function formatText(args) {
         $.label.value = text;
     }
 }
+
+function onClick(e) {
+  	$.trigger('click', e);
+}
