@@ -103,7 +103,7 @@ function formatText(args) {
 			// Android - Html does not support custom font
 			// Use default font instead
 			var isBold = false;
-			if (s.font && ( s.font.fontFamily.indexOf('-Bold') != -1 || s.font.fontFamily.indexOf('-Medium') != -1 )) {
+			if (s.font && s.font.fontFamily && ( s.font.fontFamily.indexOf('-Bold') != -1 || s.font.fontFamily.indexOf('-Medium') != -1 )) {
 				isBold = true;
 				if (hasBold === false) {
 					$.label.font.fontFamily = 'sans-serif';
