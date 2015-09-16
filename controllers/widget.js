@@ -36,96 +36,51 @@ function formatText(args) {
         search = [];
     }
         
-    if (OS_IOS) {
-        var attributedString = Ti.UI.iOS.createAttributedString({ text: text }),
-            startAt = 0,
-            sIndex, sLength;
-        
-        if (args.textColor) {
-            attributedString.addAttribute({
-                type: Ti.UI.iOS.ATTRIBUTE_FOREGROUND_COLOR,
-                value: args.textColor,
-                range: [0, text.length]
-            });
-        }
-        
-        if (args.textFont) {
-            attributedString.addAttribute({
-                type: Ti.UI.iOS.ATTRIBUTE_FONT,
-                value: args.textFont,
-                range: [0, text.length]
-            });
-        }
-        
-        for(var i=0,j=search.length; i<j; i++) {
-            s = search[i];
-            sText = (args.case_sensitive) ? (s.text + '').toLowerCase(): s.text + '';
-            sIndex  = _text.indexOf(sText, startAt);
-                          
-            sLength = sText.length;
-            
-            s.font && attributedString.addAttribute({
-                type: Ti.UI.iOS.ATTRIBUTE_FONT,
-                value: s.font,
-                range: [sIndex, sLength]
-            });
-            
-            s.color && attributedString.addAttribute({
-                type: Ti.UI.iOS.ATTRIBUTE_FOREGROUND_COLOR,
-                value: s.color,
-                range: [sIndex, sLength]
-            });
-            
-            if (args.duplicate == false && sIndex > -1) {
-                startAt += sIndex + sLength;
-            };
-        };
-        
-        $.label.attributedString = attributedString;
-    } else {
-        var html     = '',
-            tempText = text,
-            sIndex   = -1,
-            hasBold = false;
-        
-        for(var i = 0, j = search.length; i < j; i++) {
-            s     = search[i];
-            sText = s.text + '';
-            
-            if (args.case_sensitive) {
-                sText   = sText.toLowerCase();
-                sIndex  = _text.indexOf(sText);
-                sText   = text.substring(sIndex, sIndex + sText.length);
-            } else {
-                sIndex = tempText.indexOf(sText);
-            }
-
-			// Android - Html does not support custom font
-			// Use default font instead
-			var isBold = false;
-			if (s.font && s.font.fontFamily && ( s.font.fontFamily.indexOf('-Bold') != -1 || s.font.fontFamily.indexOf('-Medium') != -1 )) {
-				isBold = true;
-				if (hasBold === false) {
-					$.label.font.fontFamily = 'sans-serif';
-					hasBold = true;
-				}
-			}
-			
-			var _html = (s.color ? '<font color=' + s.color + '>' : '') + (isBold ? '<b>' : '') + sText + (isBold ? '</b>' : '') + (s.color ? '</font>' : '');
-
-            if (args.duplicate == false) {
-                html += tempText.substring(0, sIndex + sText.length).replace(sText, _html);
-                tempText = tempText.substring(sIndex + sText.length, tempText.length);
-            } else {
-                html = tempText.replace(sText, _html);
-            }
-        }
-
-        args.textColor && ($.label.color = args.textColor);
-        args.textFont && ($.label.font = args.textFont);
-        $.label.html = html;
-        $.label.value = text;
+    var attributedString = Ti.UI.createAttributedString({ text: text }),
+        startAt = 0,
+        sIndex, sLength;
+    
+    if (args.textColor) {
+        attributedString.addAttribute({
+            type: Ti.UI.ATTRIBUTE_FOREGROUND_COLOR,
+            value: args.textColor,
+            range: [0, text.length]
+        });
     }
+    
+    if (args.textFont) {
+        attributedString.addAttribute({
+            type: Ti.UI.ATTRIBUTE_FONT,
+            value: args.textFont,
+            range: [0, text.length]
+        });
+    }
+    
+    for(var i=0,j=search.length; i<j; i++) {
+        s = search[i];
+        sText = (args.case_sensitive) ? (s.text + '').toLowerCase(): s.text + '';
+        sIndex  = _text.indexOf(sText, startAt);
+                      
+        sLength = sText.length;
+        
+        s.font && attributedString.addAttribute({
+            type: Ti.UI.ATTRIBUTE_FONT,
+            value: s.font,
+            range: [sIndex, sLength]
+        });
+        
+        s.color && attributedString.addAttribute({
+            type: Ti.UI.ATTRIBUTE_FOREGROUND_COLOR,
+            value: s.color,
+            range: [sIndex, sLength]
+        });
+        
+        if (args.duplicate == false && sIndex > -1) {
+            startAt += sIndex + sLength;
+        };
+    };
+    
+    $.label.attributedString = attributedString;
 }
 
 function onClick(e) {
